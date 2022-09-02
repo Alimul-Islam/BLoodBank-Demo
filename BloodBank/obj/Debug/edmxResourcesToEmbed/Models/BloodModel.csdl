@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinalBB2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BloodGroup">
+    <Key>
+      <PropertyRef Name="GroupID" />
+    </Key>
+    <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="ReqBloods" Relationship="Self.FK_ReqBlood_BloodGroup" FromRole="BloodGroup" ToRole="ReqBlood" />
+  </EntityType>
+  <EntityType Name="ReqBlood">
+    <Key>
+      <PropertyRef Name="ReqId" />
+    </Key>
+    <Property Name="ReqId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Msg" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReqDate" Type="DateTime" Precision="3" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="GroupID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BloodGroup" Relationship="Self.FK_ReqBlood_BloodGroup" FromRole="ReqBlood" ToRole="BloodGroup" />
+  </EntityType>
+  <Association Name="FK_ReqBlood_BloodGroup">
+    <End Role="BloodGroup" Type="Self.BloodGroup" Multiplicity="1" />
+    <End Role="ReqBlood" Type="Self.ReqBlood" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BloodGroup">
+        <PropertyRef Name="GroupID" />
+      </Principal>
+      <Dependent Role="ReqBlood">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FinalBB2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BloodGroups" EntityType="Self.BloodGroup" />
+    <EntitySet Name="ReqBloods" EntityType="Self.ReqBlood" />
+    <AssociationSet Name="FK_ReqBlood_BloodGroup" Association="Self.FK_ReqBlood_BloodGroup">
+      <End Role="BloodGroup" EntitySet="BloodGroups" />
+      <End Role="ReqBlood" EntitySet="ReqBloods" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

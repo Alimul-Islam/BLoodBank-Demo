@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BB2.Models.ReqBlood>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Msg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReqDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BloodGroup.GroupName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Msg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReqDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BloodGroup.GroupName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ReqId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ReqId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ReqId })
+        </td>
+    </tr>
+}
+
+</table>

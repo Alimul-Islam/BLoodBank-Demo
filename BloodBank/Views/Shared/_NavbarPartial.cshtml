@@ -1,0 +1,24 @@
+﻿<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+    @if (Request.IsAuthenticated)
+    {
+
+        if (User.IsInRole("Admin"))
+        {
+
+            <li>@Html.ActionLink("Blood Group", "Index", "BloodGroups")</li>
+            <li>@Html.ActionLink("Apply for Blood", "Create", "ReqBloods")</li>
+
+        }
+
+        else
+        {
+            <li>@Html.ActionLink("Apply for Blood", "Create", "ReqBloods")</li>
+        }
+    }
+
+
+
+
+</ul>
